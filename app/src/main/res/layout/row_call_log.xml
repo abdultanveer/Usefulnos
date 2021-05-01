@@ -9,34 +9,34 @@
         android:id="@+id/textViewPhoneno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="9dp"
         android:text="000000000000000"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxWorking"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerCategories"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <CheckBox
+    <Button
         android:id="@+id/checkBoxWorking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:text="working"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerCategories"
-        app:layout_constraintStart_toEndOf="@+id/textViewPhoneno"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCategories" />
 
     <Spinner
         android:id="@+id/spinnerCategories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="4dp"
         android:entries="@array/categories"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxWorking"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxWorking"
+        app:layout_constraintStart_toEndOf="@+id/textViewPhoneno" />
 </androidx.constraintlayout.widget.ConstraintLayout>

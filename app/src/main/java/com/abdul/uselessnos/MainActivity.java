@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(getIntent().getExtras()!= null) {
+       /* if(getIntent().getExtras()!= null) {
             String phno = getIntent().getExtras().getString("phone_number");
             showDialog(this,phno);
-        }
+        }*/
     }
 
     private void showDialog(Context context, String phno) {
