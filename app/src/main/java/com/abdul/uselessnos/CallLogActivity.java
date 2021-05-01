@@ -1,28 +1,37 @@
 package com.abdul.uselessnos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CallLogActivity extends AppCompatActivity {
-    List<WorkingPhoneNo> workingPhoneNos;
+public class CallLogActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    ArrayList<WorkingPhoneNo> workingPhoneNos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_log);
         createList();
-        ListView callLogListView = findViewById(R.id.callLogListView);
-        ArrayAdapter<WorkingPhoneNo> adapter = new ArrayAdapter<WorkingPhoneNo>(this,
-                R.layout.row_call_log,R.id.textViewPhoneno,workingPhoneNos);
+        RecyclerView callLogListView = findViewById(R.id.callLogListView);
+        CallLogAdapterRecyclerView adapter = new CallLogAdapterRecyclerView(workingPhoneNos,this);
+        callLogListView.setLayoutManager(new LinearLayoutManager(this));
         callLogListView.setAdapter(adapter);
+       // callLogListView.setOnItemClickListener(this);
+       /* ArrayAdapter<WorkingPhoneNo> adapter = new ArrayAdapter<WorkingPhoneNo>(this,
+                R.layout.row_call_log,R.id.textViewPhoneno,workingPhoneNos);
+        callLogListView.setAdapter(adapter);*/
     }
 
     private void createList(){
@@ -49,4 +58,9 @@ public class CallLogActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+       WorkingPhoneNo workingPhoneNo = (WorkingPhoneNo) adapterView.getItemAtPosition(position);
+        Toast.makeText(this, workingPhoneNo.getPhoneNo()+"\n"+workingPhoneNo.getCategory(), Toast.LENGTH_SHORT).show();
+    }
 }
