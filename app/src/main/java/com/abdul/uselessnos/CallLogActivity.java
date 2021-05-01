@@ -2,7 +2,9 @@ package com.abdul.uselessnos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.CallLog;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,11 +27,25 @@ public class CallLogActivity extends AppCompatActivity {
 
     private void createList(){
         workingPhoneNos = new ArrayList<>();
-        workingPhoneNos.add(new WorkingPhoneNo("1234567",true,"oxygen"));
-        workingPhoneNos.add(new WorkingPhoneNo("1234567",false,"bed"));
-        workingPhoneNos.add(new WorkingPhoneNo("1234567",true,"remdesvir"));
-        workingPhoneNos.add(new WorkingPhoneNo("1234567",false,"vaccine"));
-        workingPhoneNos.add(new WorkingPhoneNo("1234567",true,"oxygen"));
+
+        Cursor managedCursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,
+                null, null,null,null);
+        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
+        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
+        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
+      /*  while (managedCursor.moveToPrevious()){
+
+            managedCursor.moveToPrevious();
+        }*/
+        int noOfRows = managedCursor.getCount();
+        managedCursor.moveToLast();
+
+        for(int i=managedCursor.getCount(); i>0; i--){
+            managedCursor.moveToPosition(i-1);
+            String phno = managedCursor.getString(number);
+            workingPhoneNos.add(new WorkingPhoneNo(phno,false,"oxygen"));
+        }
+
 
     }
 
