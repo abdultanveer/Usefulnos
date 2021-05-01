@@ -32,11 +32,10 @@ public class CallLogAdapterRecyclerView  extends RecyclerView.Adapter<CallLogAda
     FirebaseFirestore db;
     Context mContext;
     String TAG = CallLogAdapterRecyclerView.class.getSimpleName();
-    public CallLogAdapterRecyclerView(ArrayList<WorkingPhoneNo> workingPhoneNos,Context context) {
+    public CallLogAdapterRecyclerView(ArrayList<WorkingPhoneNo> workingPhoneNos, Context context, FirebaseFirestore db) {
         this.workingPhoneNos = workingPhoneNos;
         mContext = context;
-         db = FirebaseFirestore.getInstance();
-
+        this.db = db;
     }
 
     @NonNull
@@ -111,21 +110,6 @@ public class CallLogAdapterRecyclerView  extends RecyclerView.Adapter<CallLogAda
                 });
     }
 
-    private void readData(){
-        db.collection("phonenos")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
+
 
 }
